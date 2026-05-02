@@ -1,0 +1,99 @@
+:root {
+  --primary-color: #004c6d;
+  --warning-color: firebrick;
+  --text-color: black;
+  --border-color: black;
+  --nav-color: #f4f4f4;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  background-color: #f3f3f5;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.navbar-brand {
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand span {
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.navbar img {
+  height: 35px;
+}
+
+.refresh-badge {
+  background-color: white;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.container {
+  margin: 2rem;
+}
+
+.flagged-container {
+  background-color: white;
+  border-radius: 1.2rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.flagged-container h2 {
+  margin-top: 0;
+}
+
+.all-tickets-container {
+  background-color: white;
+  border-radius: 1.2rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.all-tickets-container h2 {
+  margin-top: 0;
+}
+
+h1 {
+  color: var(--primary-color);
+}
+
+.flagged-text {
+  color: var(--warning-color);
+}
+
+td {
+  padding: 10px;
+}
+
+th {
+  padding: 10px;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  box-shadow: 0 2px 0 #e0e0e0;
+}
+
+.table-scroll {
+  overflow-y: auto;
+  max-height: 400px;
+  width: 100%;
+}
