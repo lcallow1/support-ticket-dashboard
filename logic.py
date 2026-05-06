@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 def filter_tickets(tickets):
@@ -6,8 +6,10 @@ def filter_tickets(tickets):
     normal_tickets = []
     for ticket in tickets:
         agent_id = ticket["agent_id"]
-        converted_time = datetime.fromisoformat(ticket["created_at"])
-        seconds = (datetime.now() - converted_time).total_seconds()
+        converted_time = datetime.fromisoformat(ticket["created_at"]).replace(
+            tzinfo=timezone.utc
+        )
+        seconds = (datetime.now(timezone.utc) - converted_time).total_seconds()
         hours = (seconds % 86400) // 3600
         minutes = (seconds % 3600) // 60
         days = seconds // 86400

@@ -38,6 +38,7 @@ def get_tickets():
 
     clean_tickets = []
     for t in halopsa_tickets:
+        print(t["id"], t["dateoccurred"])
         clean_tickets.append(
             {
                 "id": t["id"],
