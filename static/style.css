@@ -1,99 +1,193 @@
+/* ============================
+   1. Tokens
+   ============================ */
 :root {
-  --primary-color: #004c6d;
-  --warning-color: firebrick;
-  --text-color: black;
-  --border-color: black;
-  --nav-color: #f4f4f4;
+  --color-bg: #f5f7fa;
+  --color-surface: #ffffff;
+  --color-border: #e1e5eb;
+  --color-text: #1a1f2e;
+  --color-text-muted: #6b7380;
+  --color-critical: #e5484d;
+  --color-warning: #f76b15;
+  --color-success: #46a758;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+/* ============================
+   2. Base / reset
+   ============================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-  font-family: "Inter", sans-serif;
   margin: 0;
-  background-color: #f3f3f5;
+  font-family:
+    "Inter",
+    -apple-system,
+    sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+/* ============================
+   3. Layout
+   ============================ */
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  justify-content: space-between;
+  height: 80px;
+  padding: 0 var(--space-8);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .navbar-brand {
-  gap: 1rem;
   display: flex;
   align-items: center;
+  gap: var(--space-3);
+}
+
+.navbar-brand img {
+  height: 40px;
 }
 
 .navbar-brand span {
-  font-weight: 800;
-  font-size: 1.2rem;
-}
-
-.navbar img {
-  height: 35px;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .refresh-badge {
-  background-color: white;
-  border-radius: 8px;
-  padding: 0.5rem;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
 }
 
 .container {
-  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-8);
+}
+
+/* ============================
+   4. Components — tiles
+   ============================ */
+.summary-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.tile {
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.tile h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
+.tile p {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+/* ============================
+   5. Components — panels
+   ============================ */
+.flagged-container,
+.all-tickets-container {
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
 }
 
 .flagged-container {
-  background-color: white;
-  border-radius: 1.2rem;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2rem;
+  border-left: 4px solid var(--color-critical);
 }
 
-.flagged-container h2 {
-  margin-top: 0;
-}
-
-.all-tickets-container {
-  background-color: white;
-  border-radius: 1.2rem;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-
+.flagged-container h2,
 .all-tickets-container h2 {
-  margin-top: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: var(--space-4);
 }
 
-h1 {
-  color: var(--primary-color);
+/* ============================
+   6. Components — tables
+   ============================ */
+.table-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+  border-radius: var(--radius-md);
 }
 
-.flagged-text {
-  color: var(--warning-color);
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
 }
 
-td {
-  padding: 10px;
-}
-
-th {
-  padding: 10px;
-}
-
-thead th {
+.ticket-table thead {
   position: sticky;
   top: 0;
-  background-color: white;
-  box-shadow: 0 2px 0 #e0e0e0;
+  background: var(--color-surface);
 }
 
-.table-scroll {
-  overflow-y: auto;
-  max-height: 400px;
-  width: 100%;
+.ticket-table th {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ticket-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ticket-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.ticket-table tbody tr:hover {
+  background: var(--color-bg);
+}
+
+/* ============================
+   7. States
+   ============================ */
+.empty-state {
+  padding: var(--space-8);
+  text-align: center;
+  font-size: 1rem;
+  color: var(--color-success);
 }

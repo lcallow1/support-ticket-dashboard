@@ -28,19 +28,34 @@
         >Last refreshed: {{ last_refreshed.strftime('%H:%M') }}</span
       >
     </nav>
+
     <div class="container">
+      <div class="summary-tiles">
+        <div class="tile">
+          <h1>{{ total_open }}</h1>
+          <p>Total Open</p>
+        </div>
+        <div class="tile">
+          <h1>{{ unassigned }}</h1>
+          <p>Unassigned</p>
+        </div>
+        <div class="tile">
+          <h1>{{ flagged_count }}</h1>
+          <p>Flagged</p>
+        </div>
+      </div>
+
       <div class="flagged-container">
         <h2 class="flagged-text">
           Flagged Tickets ({{ flagged_tickets|length }})
         </h2>
         {% if flagged_tickets %}
         <div class="table-scroll">
-          <table class="flagged-table">
+          <table class="ticket-table flagged">
             <thead>
               <tr>
                 <th>ID</th>
                 <th>Title</th>
-                <th>Description</th>
                 <th>Customer Name</th>
                 <th>Time Waiting</th>
               </tr>
@@ -48,30 +63,29 @@
             <tbody>
               {% for ticket in flagged_tickets %}
               <tr>
-                <td>{{ticket.id}}</td>
-                <td>{{ticket.title}}</td>
-                <td>{{ticket.description}}</td>
-                <td>{{ticket.customer_name}}</td>
-                <td>{{ticket.time_waiting}}</td>
+                <td>{{ ticket.id }}</td>
+                <td>{{ ticket.title }}</td>
+                <td>{{ ticket.customer_name }}</td>
+                <td>{{ ticket.time_waiting }}</td>
               </tr>
               {% endfor %}
             </tbody>
           </table>
         </div>
         {% else %}
-        <p style="color: green; font-size: 1.2rem">✅ All tickets assigned</p>
+        <p class="empty-state">✅ All tickets assigned</p>
         {% endif %}
       </div>
 
       <div class="all-tickets-container">
         <h2>All Tickets ({{ normal_tickets|length }})</h2>
+        {% if normal_tickets %}
         <div class="table-scroll">
-          <table>
+          <table class="ticket-table">
             <thead>
               <tr>
                 <th>ID</th>
                 <th>Title</th>
-                <th>Description</th>
                 <th>Customer Name</th>
                 <th>Time Waiting</th>
               </tr>
@@ -79,16 +93,18 @@
             <tbody>
               {% for ticket in normal_tickets %}
               <tr>
-                <td>{{ticket.id}}</td>
-                <td>{{ticket.title}}</td>
-                <td>{{ticket.description}}</td>
-                <td>{{ticket.customer_name}}</td>
-                <td>{{ticket.time_waiting}}</td>
+                <td>{{ ticket.id }}</td>
+                <td>{{ ticket.title }}</td>
+                <td>{{ ticket.customer_name }}</td>
+                <td>{{ ticket.time_waiting }}</td>
               </tr>
               {% endfor %}
             </tbody>
           </table>
         </div>
+        {% else %}
+        <p class="empty-state">No open tickets</p>
+        {% endif %}
       </div>
     </div>
   </body>
