@@ -1,7 +1,8 @@
 from datetime import datetime, timezone
 
-
+#Takes a ticket, figures out how long it's been open, and adds a human-readable time_waiting string to it
 def get_time_waiting(ticket):
+    #Convert Halo string into Python datetime object and make it utc
     converted_time = datetime.fromisoformat(ticket["created_at"]).replace(
             tzinfo=timezone.utc)
     seconds = (datetime.now(timezone.utc) - converted_time).total_seconds()
@@ -12,6 +13,12 @@ def get_time_waiting(ticket):
         ticket["time_waiting"] = f"{days:.0f}d:{hours:02.0f}:{minutes:02.0f}"
     else:
         ticket["time_waiting"] = f"{hours:02.0f}:{minutes:02.0f}"
+    if seconds < 3600:
+        ticket["time_tier"] = "fresh"
+    elif seconds < 14400:
+        ticket["time_tier"] = "warning"
+    else:
+        ticket["time_tier"] = "critical"
     return ticket, seconds
 
 def get_flagged_tickets(tickets):
