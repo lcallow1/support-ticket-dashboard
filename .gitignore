@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 .env
 tickets_sample.json
+tickets_dump.json
