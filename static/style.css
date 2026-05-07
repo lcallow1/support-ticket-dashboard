@@ -122,7 +122,8 @@ p {
    5. Components — panels
    ============================ */
 .flagged-container,
-.all-tickets-container {
+.all-tickets-container,
+.updated-container {
   padding: var(--space-6);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -133,8 +134,13 @@ p {
   border-left: 4px solid var(--color-critical);
 }
 
+.updated-container {
+  border-left: 4px solid var(--color-warning);
+}
+
 .flagged-container h2,
-.all-tickets-container h2 {
+.all-tickets-container h2,
+.updated-container h2 {
   font-size: 1.125rem;
   font-weight: 600;
   margin-bottom: var(--space-4);

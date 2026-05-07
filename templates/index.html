@@ -36,8 +36,8 @@
           <p>Total Open</p>
         </div>
         <div class="tile">
-          <h1>{{ unassigned }}</h1>
-          <p>Unassigned</p>
+          <h1>{{ updated_count }}</h1>
+          <p>Updated</p>
         </div>
         <div class="tile">
           <h1>{{ flagged_count }}</h1>
@@ -77,11 +77,13 @@
         {% endif %}
       </div>
 
-      <div class="all-tickets-container">
-        <h2>All Tickets ({{ normal_tickets|length }})</h2>
-        {% if normal_tickets %}
+            <div class="updated-container">
+        <h2 class="updated-text">
+          Updated Tickets ({{ updated_tickets|length }})
+        </h2>
+        {% if updated_tickets %}
         <div class="table-scroll">
-          <table class="ticket-table">
+          <table class="ticket-table updated">
             <thead>
               <tr>
                 <th>ID</th>
@@ -91,7 +93,7 @@
               </tr>
             </thead>
             <tbody>
-              {% for ticket in normal_tickets %}
+              {% for ticket in updated_tickets %}
               <tr>
                 <td>{{ ticket.id }}</td>
                 <td>{{ ticket.title }}</td>
@@ -103,7 +105,7 @@
           </table>
         </div>
         {% else %}
-        <p class="empty-state">No open tickets</p>
+        <p class="empty-state">✅ All tickets responded to</p>
         {% endif %}
       </div>
     </div>

@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from data import get_tickets
-from logic import filter_tickets, get_summary_stats
+from logic import get_flagged_tickets, get_summary_stats, get_updated_tickets
 from datetime import datetime
 
 app = Flask(__name__)
@@ -9,17 +9,19 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     tickets = get_tickets()
-    flagged_tickets, normal_tickets = filter_tickets(tickets)
+    flagged_tickets = get_flagged_tickets(tickets)
     current_time = datetime.now()
-    total_open, unassigned, flagged_count = get_summary_stats(tickets)
+    updated_tickets = get_updated_tickets(tickets)
+    total_open, flagged_count = get_summary_stats(tickets, flagged_tickets)
+    updated_count = len(updated_tickets)
     return render_template(
         "index.html",
-        normal_tickets=normal_tickets,
         flagged_tickets=flagged_tickets,
         last_refreshed=current_time,
         total_open=total_open,
-        unassigned=unassigned,
         flagged_count=flagged_count,
+        updated_tickets=updated_tickets,
+        updated_count=updated_count
     )
 
 

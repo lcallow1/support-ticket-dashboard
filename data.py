@@ -38,8 +38,8 @@ def get_tickets():
 
     clean_tickets = []
     for t in halopsa_tickets:
-        print(t["id"], t["dateoccurred"])
-        clean_tickets.append(
+        if t["tickettype_id"] == 1:
+            clean_tickets.append(
             {
                 "id": t["id"],
                 "title": t["summary"],
@@ -47,7 +47,9 @@ def get_tickets():
                 "customer_name": t["user_name"],
                 "agent_id": None if t["agent_id"] == 1 else t["agent_id"],
                 "created_at": t["dateoccurred"],
+                "status_id": t["status_id"],
             }
         )
 
     return clean_tickets
+
